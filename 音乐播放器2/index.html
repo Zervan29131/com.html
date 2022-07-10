@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/iconfont1.css">
+    <link rel="stylesheet" href="./css/iconfont2.css">
+    <link rel="stylesheet" href="./css/iconfont3.css">   
+</head>
+<body>
+    <div class="wrapper">
+        <main class="main">
+            <img src="./source/2.jpg" alt="">
+            
+            <audio id="audio" src="./source/1.mp3"></audio>
+        </main>
+        <!-- 音乐控制 -->
+        <div class="tool">
+            <div class="btn">
+                <i class="iconfont icon-bofang"></i>
+                
+            </div>
+            <div class="progress">
+                <!-- 开始时间控制 -->
+                <div class="current-time"></div>
+                <div class="pro-box">
+                    <div class="pro-bg"></div>
+                    <div class="pro-active">
+                        <!-- 播放按钮控制 -->
+                        <div class="radio-box">
+                            <span class="radio"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="all-time"></div>
+            </div>
+            <!-- 音量控制 -->
+            <div class="volume">
+                <i class="iconfont icon-laba"></i>
+                <!-- 上一首 -->
+                <i class="iconfont icon-shangyishou upper"></i>
+                <!-- 下一首 -->
+                <i class="iconfont icon-xiayishou next"></i>
+                <div class="volume-box">
+                    <div class="all-volume">
+                        <div class="now-volume">
+                            <div class="control-box1">
+                                <a href="javascript:;"><span class="control1"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 播放器功能 -->
+    <script src="./js/index.js"></script>
+</body>
+</html>

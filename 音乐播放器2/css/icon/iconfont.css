@@ -1,0 +1,25 @@
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1563454295243'); /* IE9 */
+  src: url('iconfont.eot?t=1563454295243#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAPwAAsAAAAACAgAAAOiAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDBgqDbINOATYCJAMMCwgABCAFhG0HOhsYBxFVnHHIfpwWaz6XOv1hdFZCEFXO7NFKOsU6QA4wGUIAvl+A8EkAhrpvGL5xAwQQ6N2ajrGNilBdsuepZ/kfyXenl4Z1HqdRCiFBOC4OVTM9gPOzLS5zLA/lAhgOUMDG3K1ItaVagbzD2JUXsR0COMikHGnXoZsTCx2jnwAyafzY4VgpPXpNqWAhmCVTdWQdBpa2XHsMrPV/Xr5QRyzQMBTG0F5j2o+i1fu49+uVN+RlkItAMJ4VYLNAAeWADjKk1N4PFcbLUTgUuV6fa6IjaGOFQiHw+arSXOk/ngZiYhSHA1AMExq8j7NZEHi/PoEGnP8sMIEw4BDwDmHjT1XoZRERsdEZ2Qt9Pqc3w96csHKryI7MYNDj97vyrQIBd+KWxBWbvAkicHUO/MWgFVtEVW1duRnNu8lOvGqsd/vhlUmerTurdiS6txw6tC2h41axXSu98c5NibIlyV01MOBz+gyca7+ftrPfXtnwXhCftzMtGPA673R+gFfK2Z68z9fsuq/d7UCHh4EWN+vsyT3Q4Jiu97L+ZB7VP31Ux/L7SPE6Y64pPUUdrK4+6EgUNaiD8edO5MjYOm6pP80c64ijweCLU2ZwTH38pB/Vj338+L+ROdcsMOaGzzUKzLnbKdoeyor4yMDitLsXx9+9lxE4d9X78vsWByNiQbs6QQwujSeaaFE+eZHXLnGdtE1unTTJ03VO9jKz/aCyKZ2HDGk/q0NKt9qfj4xp7HQ2Gls9KN3omLu8x5wprofaz1O5mrbuXTLMWWo7iqZUjhjb7lqz8ZJVNaxdzdnp94vL8ud2GT2qw4kKhgEQeq12q0yaDKijquj//g0uc/OMoVHN/lm2DkC1e5UHekMB4GjnnGDdvUPwNwUtq3RVBVZM5tt83aEMTXjRALlcwT8sB4jl11+Z0LoYhCUhBk2YDFAs+UgdWw4GWz0wWVqCQxnFbFscYk5WAyjlBUBE8wZNpGugRPNB6tgvGBL5a01XJ4Tg4C5uSVuhVLu2gkbRg31C5bgny6S7oPSA4doaSYp8/AVlrEKQRkk2VWCPMsaI8RYyVQIS7mAPdsO2ZRiEa3QalapDHsdU9kGR426y05ZAhkIeYD0BFYf1yK2vdrnvP0DBVcuQmooK+wUSo6p5ICUiaYEs5H2rimu5ZXQTZChFACJYB9gDK2rNOAOG8k415KiIskd0kBOjWtRWHs2v7J5vA+BgtFJpokQn7OYyMvuwGsFkPN1kAgAA') format('woff2'),
+  url('iconfont.woff?t=1563454295243') format('woff'),
+  url('iconfont.ttf?t=1563454295243') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1563454295243#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-zanting:before {
+  content: "\e613";
+}
+
+.icon-bofang:before {
+  content: "\e691";
+}
+

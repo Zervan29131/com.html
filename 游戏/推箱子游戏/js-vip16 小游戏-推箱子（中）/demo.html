@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>please enter your title</title>
+		<meta charset="utf-8">
+		<meta name="Author" content="潭州学院-阿飞老师">
+		<style type='text/css'>
+			*{ margin:0; padding:0;}
+			#wrap{
+				margin:50px auto;
+				background:url(img/block.gif);
+				position:relative;
+			}
+			#wrap div{
+				width:35px;
+				height:35px;
+				position:absolute;
+				/*float:left;*/
+			}
+			#wrap div img{
+				position:absolute;
+				bottom:0;
+			}
+			#wrap div.ball img{
+				left:50%;
+				bottom:50%;
+				margin-left:-15px;
+				margin-bottom:-15px;
+			}
+			/*
+			#wrap div.wall{
+				z-index:3;
+			}
+			#wrap div.box{
+				z-index:1;
+			}
+			#wrap div.person{
+				z-index:2;
+			}
+			*/
+			#wrap div.person img{
+				left:50%;
+				margin-left:-25px;
+			}
+		</style>
+
+
+	</head>
+	<body>
+		
+		<div id="wrap"></div>
+
+		<script type="text/javascript">
+
+			window.onload = function(){
+				Game.exe();
+			};
+			
+			var Game = {
+				
+				// 先找wrap
+				oWrap : document.getElementById('wrap'),
+				
+				// 执行函数
+				exe : function(){
+					this.createMap(this.level);
+				},
+				
+				//第几关
+				level : 0,
+
+				size : {x:16,y:16},
+				
+				//创建地图
+				createMap : function(lv){
+					//wrap大小
+					var oPerson , oDiv , oImg;
+					this.oWrap.style.cssText = 'width:'+this.size.x*35+'px;height:'+this.size.y*35+'px';	
+					//创建 16*16 个小格子
+					for ( var i=0;i<this.size.x*this.size.y;i++ )
+					{
+						switch ( this.mapData[lv][i] )
+						{
+							case 1:
+								appDiv.call(this,i);
+								oImg.src = 'img/wall.png';
+								oDiv.className = 'wall';
+								break;
+							case 2:
+								appDiv.call(this,i);
+								oImg.src = 'img/ball.png';
+								oDiv.className = 'ball';
+								oDiv.style.zIndex = 0;
+								break;
+							case 3:
+								appDiv.call(this,i);
+								oImg.src = 'img/box.png';
+								oDiv.className = 'box';
+								break;
+							case 4:
+								appDiv.call(this,i);
+								oImg.src = 'img/down.png';
+								oDiv.className = 'person';
+								oPerson = oImg;
+								break;
+						}
+					}
+					this.controlPerson( oPerson );
+					function appDiv(i){
+						var x = i % this.size.x;
+						var y = parseInt( i / this.size.x );
+						oDiv = document.createElement('div');
+						oDiv.x = x;
+						oDiv.y = y;
+						oDiv.style.cssText = 'left:'+ x*35 +'px;top:'+ y*35 +'px;z-index:'+(y*this.size.x)+';';
+						
+						oImg = new Image();
+						oDiv.appendChild(oImg);
+						this.oWrap.appendChild( oDiv );
+					}
+				},
+				
+				//控制人物
+				controlPerson : function( oP ){
+					var This = this;
+					var oParent = oP.parentNode;
+					document.onkeydown = function(ev){
+						ev = ev || window.event;
+						var keyCode = ev.keyCode;
+						switch ( keyCode )
+						{	
+							//  ←
+							case 37:
+								oP.src = 'img/left.png';
+								This.movePerson({x:-1} , oParent);
+								return false;
+								break;
+							//  ↑
+							case 38:
+								oP.src = 'img/up.png';
+								This.movePerson({y:-1} , oParent);
+								return false;
+								break;
+							//  →
+							case 39:
+								oP.src = 'img/right.png';
+								This.movePerson({x:1} , oParent);
+								return false;
+								break;
+							//  ↓
+							case 40:
+								oP.src = 'img/down.png';
+								This.movePerson({y:1} , oParent);
+								return false;
+								break;
+						}
+						
+					}
+				},
+				
+				
+				//人物移动
+				movePerson : function( mJson , oParent ){
+					var x = mJson.x || 0;
+					var y = mJson.y || 0;
+					var oBox = this.getClass('box' , this.oWrap);
+					if ( this.mapData[this.level][(oParent.x+x) + (oParent.y+y)*this.size.x] != 1 )
+					{
+						oParent.x += x;
+						oParent.y += y;
+						oParent.style.left = oParent.x*35 + 'px';
+						oParent.style.top = oParent.y*35 + 'px';
+						oParent.style.zIndex = oParent.x + oParent.y*this.size.x;
+						for ( var i=0;i<oBox.length;i++ )
+						{
+							if ( oBox[i].x == oParent.x && oBox[i].y == oParent.y )
+							{
+								if ( this.mapData[this.level][(oBox[i].x+x) + (oBox[i].y+y)*this.size.x] != 1 )
+								{
+									if ( this.collision(oBox[i] , x , y) )
+									{
+										oBox[i].x += x;
+										oBox[i].y += y;
+										oBox[i].style.left = oBox[i].x*35 + 'px';
+										oBox[i].style.top = oBox[i].y*35 + 'px';
+										oBox[i].style.zIndex = oBox[i].y*this.size.x;
+									}
+									else
+									{
+										oParent.x -= x;
+										oParent.y -= y;
+										oParent.style.left = oParent.x*35 + 'px';
+										oParent.style.top = oParent.y*35 + 'px';
+										oParent.style.zIndex = oParent.x + oParent.y*this.size.x;
+									}
+								}
+								else
+								{
+									oParent.x -= x;
+									oParent.y -= y;
+									oParent.style.left = oParent.x*35 + 'px';
+									oParent.style.top = oParent.y*35 + 'px';
+									oParent.style.zIndex = oParent.x + oParent.y*this.size.x;
+								}
+								
+							}
+						}
+
+						
+					}
+				},
+
+				//箱箱碰撞
+				collision : function( obj , x , y){
+					var oBox = this.getClass('box' , this.oWrap);
+					for ( var i=0;i<oBox.length;i++ )
+					{
+						if ( oBox[i] != obj )
+						{
+							if ( oBox[i].x == obj.x+x && oBox[i].y == obj.y+y  )
+							{
+								return false;
+							}
+						}
+					}
+					return true;
+				},
+				
+
+				//关卡数据
+				mapData : [
+					
+					//第一关数据
+					[
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,1,2,1,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,1,0,1,1,1,1,0,0,0,0,
+						0,0,0,0,1,1,1,3,0,3,2,1,0,0,0,0,
+						0,0,0,0,1,2,0,3,4,1,1,1,0,0,0,0,
+						0,0,0,0,1,1,1,1,3,1,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,1,2,1,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+					],
+
+					[],
+					[],
+					[],
+					[],
+
+				
+				],
+
+				//扩展方法
+				getClass : function( cName , obj ){
+					obj = obj || document;
+					if ( obj.getElementsByClassName )
+					{
+						return obj.getElementsByClassName(cName);
+					}
+					else
+					{
+						var arr = [];
+						var allE = obj.getElementsByTagName('*');
+						for ( var i=0;i<allE.length;i++ )
+						{
+							var allEArr = allE[i].className.split(' ');
+							for ( var j=0;j<allEArr.length;j++ )
+							{
+								if ( allEArr[j] == cName )
+								{
+									arr.push( allE[i] );
+									break;
+								}
+							}
+						}
+						return arr;
+					}
+				},
+
+			};
+
+			/*
+				第一步 ： 做地图
+					wrap 大小
+			
+			*/
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>please enter your title</title>
+		<meta charset="utf-8">
+		<meta name="Author" content="潭州学院-阿飞老师">
+		<style type='text/css'>
+			*{ margin:0; padding:0;}
+			#wrap{
+				margin:50px auto;
+				background:url(img/block.gif);
+				position:relative;
+			}
+			#wrap div{
+				width:35px;
+				height:35px;
+				position:absolute;
+				/*float:left;*/
+			}
+			#wrap div img{
+				position:absolute;
+				bottom:0;
+			}
+			#wrap div img.ball{
+				left:50%;
+				bottom:50%;
+				margin-left:-15px;
+				margin-bottom:-15px;
+			}
+			#wrap div img.person{
+				left:50%;
+				margin-left:-25px;
+			}
+		</style>
+
+
+	</head>
+	<body>
+		
+		<div id="wrap"></div>
+
+		<script type="text/javascript">
+
+			window.onload = function(){
+				Game.exe();
+			};
+			
+			var Game = {
+				
+				// 先找wrap
+				oWrap : document.getElementById('wrap'),
+				
+				// 执行函数
+				exe : function(){
+					this.createMap(this.level);
+				},
+				
+				//第几关
+				level : 0,
+				
+				//创建地图
+				createMap : function(lv){
+					//wrap大小
+					var size = { x : 16 , y : 16 };
+					var oPerson , oDiv , oImg;
+					this.oWrap.style.cssText = 'width:'+size.x*35+'px;height:'+size.y*35+'px';	
+					//创建 16*16 个小格子
+					for ( var i=0;i<size.x*size.y;i++ )
+					{
+						switch ( this.mapData[lv][i] )
+						{
+							case 1:
+								appDiv.call(this,i);
+								oImg.src = 'img/wall.png';
+								oImg.className = 'wall';
+								break;
+							case 2:
+								appDiv.call(this,i);
+								oImg.src = 'img/ball.png';
+								oImg.className = 'ball';
+								break;
+							case 3:
+								appDiv.call(this,i);
+								oImg.src = 'img/box.png';
+								oImg.className = 'box';
+								break;
+							case 4:
+								appDiv.call(this,i);
+								oImg.src = 'img/down.png';
+								oImg.className = 'person';
+								oPerson = oImg;
+								break;
+						}
+					}
+					this.controlPerson( oPerson );
+					function appDiv(i){
+						var x = i % size.x;
+						var y = parseInt( i / size.x );
+						oDiv = document.createElement('div');
+						oDiv.style.cssText = 'left:'+ x*35 +'px;top:'+ y*35 +'px;';
+						oImg = new Image();
+						oDiv.appendChild(oImg);
+						this.oWrap.appendChild( oDiv );
+					}
+				},
+
+				controlPerson : function( oP ){
+					document.onkeydown = function(ev){
+						ev = ev || window.event;
+						var keyCode = ev.keyCode;
+						switch ( keyCode )
+						{	
+							//  ←
+							case 37:
+								oP.src = 'img/left.png';
+								break;
+							//  ↑
+							case 38:
+								oP.src = 'img/up.png';
+								break;
+							//  →
+							case 39:
+								oP.src = 'img/right.png';
+								break;
+							//  ↓
+							case 40:
+								oP.src = 'img/down.png';
+								break;
+						}
+						return false;
+					}
+				},
+
+				//关卡数据
+				mapData : [
+					
+					//第一关数据
+					[
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,1,2,1,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,1,0,1,1,1,1,0,0,0,0,
+						0,0,0,0,1,1,1,3,0,3,2,1,0,0,0,0,
+						0,0,0,0,1,2,0,3,4,1,1,1,0,0,0,0,
+						0,0,0,0,1,1,1,1,3,1,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,1,2,1,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+						0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+					],
+
+					[],
+					[],
+					[],
+					[],
+
+				
+				],
+
+			};
+
+			/*
+				第一步 ： 做地图
+					wrap 大小
+			
+			*/
+
+		</script>
+	</body>
+</html>
